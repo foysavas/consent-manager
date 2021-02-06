@@ -6,7 +6,7 @@ async function fetchDestinationForWriteKey(
   cdnHost: string,
   writeKey: string
 ): Promise<Destination[]> {
-  const res = await fetch(`https://${cdnHost}/v1/projects/${writeKey}/integrations`)
+  const res = await fetch(`${cdnHost.match(/^http(|s):\/\//) ? cdnHost : `https://${cdnHost}`}/v1/projects/${writeKey}/integrations`)
 
   if (!res.ok) {
     throw new Error(
